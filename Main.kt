@@ -9,17 +9,31 @@ private const val IN_ARGUMENT = "-in"
 private const val OUT_ARGUMENT = "-out"
 
 fun main(args: Array<String>) {
-    setIntensity()
-//    invertPhoto(args)
+    val fileNames = getInputOutput(args)
+    setIntensity(fileNames)
+//    invertPhoto(fileNames)
 //    drawCross()
 }
 
-fun setIntensity() {
-    TODO("Not yet implemented")
+fun setIntensity(fileNames: Pair<String, String>) {
+    val (inputFileName, outputFileName) = fileNames
+    val imageFile = File(inputFileName)
+    val file = ImageIO.read(imageFile)
+
+    val image = BufferedImage(file.width, file.height, BufferedImage.TYPE_INT_RGB)
+    for (x in 0 until file.width) {
+        for (y in 0 until file.height) {
+            val color = Color(file.getRGB(x, y))
+            val modifiedColor = Color(255 - color.red, 255 - color.green, 255 - color.blue)
+            image.setRGB(x, y, modifiedColor.rgb)
+        }
+    }
+    val outputFile = File(outputFileName)
+    ImageIO.write(image, "png", outputFile)
 }
 
-private fun invertPhoto(args: Array<String>) {
-    val (inputFileName, outputFileName) = getInputOutput(args)
+private fun invertPhoto(fileNames: Pair<String, String>) {
+    val (inputFileName, outputFileName) = fileNames
     val imageFile = File(inputFileName)
     val file = ImageIO.read(imageFile)
 
