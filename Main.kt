@@ -9,13 +9,17 @@ private const val IN_ARGUMENT = "-in"
 private const val OUT_ARGUMENT = "-out"
 
 fun main(args: Array<String>) {
-    invertPhoto(args)
+    setIntensity()
+//    invertPhoto(args)
 //    drawCross()
 }
 
+fun setIntensity() {
+    TODO("Not yet implemented")
+}
+
 private fun invertPhoto(args: Array<String>) {
-    val inputFileName = if (args[0] == IN_ARGUMENT) args[1] else "in.png"
-    val outputFileName = if (args[2] == OUT_ARGUMENT) args[3] else "out.png"
+    val (inputFileName, outputFileName) = getInputOutput(args)
     val imageFile = File(inputFileName)
     val file = ImageIO.read(imageFile)
 
@@ -29,6 +33,12 @@ private fun invertPhoto(args: Array<String>) {
     }
     val outputFile = File(outputFileName)
     ImageIO.write(image, "png", outputFile)
+}
+
+private fun getInputOutput(args: Array<String>): Pair<String, String> {
+    val inputFileName = if (args[0] == IN_ARGUMENT) args[1] else "in.png"
+    val outputFileName = if (args[2] == OUT_ARGUMENT) args[3] else "out.png"
+    return Pair(inputFileName, outputFileName)
 }
 
 private fun drawCross() {
