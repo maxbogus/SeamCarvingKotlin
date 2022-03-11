@@ -1,6 +1,5 @@
 package seamcarving
 
-import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.File
@@ -20,8 +19,7 @@ fun main() {
     graphics.color = Color.BLACK
     graphics.fillRect(0, 0 , width, height)
     graphics.color = Color.RED
-    graphics.stroke = BasicStroke(2F)
-    graphics.drawLine(0, 0, width, height)
-    graphics.drawLine(0, height, width, 0)
+    graphics.drawLine(0, 0, width - 1, height - 1)
+    graphics.drawLine(-1, height, width - 1, 0)
     ImageIO.write(image, "png", inputFile)
 }
